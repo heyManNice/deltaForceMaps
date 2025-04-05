@@ -20,20 +20,33 @@ function measure(map: L.Map,location: L.LatLngExpression){
         markers.length = 0;
         clearMeasured();
     }
-    markers.push(L.marker(location).addTo(map));
+    const marker = L.marker(location).addTo(map)
+    markers.push(marker);
     if(markers.length===2){
         //添加标记后达到两个，就计算距离
-        const distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
-        const line = L.polyline([markers[0].getLatLng(),markers[1].getLatLng()],{color:"#FFA500"}).addTo(map);
+        const a = markers[0].getLatLng();
+        const b = markers[1].getLatLng();
+
+        const line = L.polyline([a,b],{color:"#FFA500"}).addTo(map);
+
+        const distance = a.distanceTo(b);
+        const midPoint = new L.LatLng(
+            (a.lat + b.lat) / 2,
+            (a.lng + b.lng) / 2, 
+        )
         const tooltip = L.tooltip({
             permanent: true,
             direction: 'center',
             opacity: 0.7,
             className: "leaflet-tooltip-custom",
             offset: [0, -10],
-        }).setLatLng(markers[1].getLatLng())
+        }).setLatLng(midPoint)
         .setContent(`距离: ${distance.toFixed(2)}米`)
         .addTo(map)
+
+        //确保两点都能看到
+        const bounds = L.latLngBounds([a,b]);
+        map.fitBounds(bounds,{padding:[10,10]});
 
         clearMeasured = ()=>{
             line.removeFrom(map);
