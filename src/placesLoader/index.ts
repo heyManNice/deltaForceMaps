@@ -50,10 +50,11 @@ function loadPlaces(map:L.Map,places:GeoJSON.GeometryObject) {
         onEachFeature: (feature, layer) => {
             const markerLayer = layer as L.Marker;
             const placeName = feature.properties.Name;
+            const placeLevel = feature.properties.level;
             showPlaceMarker({
                 map: map,
                 name: placeName,
-                level: 'official',
+                level: placeLevel,
                 location: markerLayer.getLatLng(),
             })
         }
