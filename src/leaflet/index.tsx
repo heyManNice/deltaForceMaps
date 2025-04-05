@@ -5,6 +5,8 @@ import MeasurerControl from "@src/measurer";
 import zoomMeter from "@src/zoomMeter";
 import placesLoader from '@src/placesLoader';
 import tilesLoader from "@src/tilesLoader";
+import roadsLoader from '@src/roadsLoader';
+import layerController from '@src/layerController';
 
 import { useEffect, useRef} from 'react';
 import { Location } from './types';
@@ -15,7 +17,8 @@ import "leaflet-rotate";
 
 const MapPlugins = [
     tilesLoader,
-    placesLoader
+    placesLoader,
+    roadsLoader
 ];
 
 const ControlPlugins = [
@@ -27,6 +30,12 @@ const ControlPlugins = [
     },
     {
         plugin:MeasurerControl,
+        options:{
+            position: "topleft"
+        }
+    },
+    {
+        plugin:layerController,
         options:{
             position: "topleft"
         }
@@ -48,6 +57,7 @@ const MapComponent = () => {
             zoomControl: true,
             rotate: true,
             touchRotate: true,
+            preferCanvas: true
         });
 
 
@@ -67,7 +77,6 @@ const MapComponent = () => {
         map.on('click', (e) => {
             console.log(`纬经:[${e.latlng.lat},${e.latlng.lng}]`);
         })
-
         return () => {
             map.remove();
         };
