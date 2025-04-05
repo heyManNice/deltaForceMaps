@@ -17,7 +17,7 @@ function showPlaceMarker(place: PlaceConfig) {
     })
     //如果没有设置缩放范围，始终显示
     if(ZoomRange[place.level]===void 0) {
-        marker.addTo(place.map);
+        marker.addTo(place.layerGroup);
         return;
     }
     let isShow = false;
@@ -28,7 +28,7 @@ function showPlaceMarker(place: PlaceConfig) {
 
         if(zoom >= min && zoom <= max) {
             if(!isShow) {
-                marker.addTo(place.map);
+                marker.addTo(place.layerGroup);
                 isShow = true;
             }
             return;
@@ -46,6 +46,10 @@ function showPlaceMarker(place: PlaceConfig) {
 
 
 function loadPlaces(map:L.Map,places:GeoJSON.GeometryObject) {
+    const layerGroup = L.layerGroup(void 0,{
+            pane: "地标",
+        });
+    layerGroup.addTo(map);
     L.geoJSON(places, {
         onEachFeature: (feature, layer) => {
             const markerLayer = layer as L.Marker;
@@ -53,6 +57,7 @@ function loadPlaces(map:L.Map,places:GeoJSON.GeometryObject) {
             const placeLevel = feature.properties.level;
             showPlaceMarker({
                 map: map,
+                layerGroup: layerGroup,
                 name: placeName,
                 level: placeLevel,
                 location: markerLayer.getLatLng(),

@@ -1,4 +1,3 @@
-
 export type PlaceLevel =
     | "official" //官方名称
     | "unofficialL1" //一级非官方名称粗略
@@ -9,17 +8,7 @@ export type PlaceLevel =
     | "task" //任务点
     | "switch" //拉闸点
     | "accessControl" //刷卡点
-    | "eespawn"//重生点
-;
-
-export type RoadLevel =
-    | "roadway" //马路
-    | "railway"//铁路
-    | "pedestrianPath"//人行道
-    | "indoorPassage"//室内通道
-    | "shortcutPath"//捷径
-    | "stairway"//楼梯道路
-    | "ziplinePath"//滑索道
+    | "eespawn" //重生点
 ;
 
 //[最小可见缩放级别, 最大可见缩放级别]
@@ -28,7 +17,7 @@ export type VisibleZoomRange = [number, number];
 /**
  * 不同级别缩放范围
  */
-export const ZoomRange:Record<PlaceLevel,VisibleZoomRange> ={
+export const ZoomRange: Record<PlaceLevel, VisibleZoomRange> = {
     "official": [18, 20],
     "unofficialL1": [17, 21],
     "unofficialL2": [17, 21],
@@ -38,13 +27,13 @@ export const ZoomRange:Record<PlaceLevel,VisibleZoomRange> ={
     "task": [17, 21],
     "switch": [17, 21],
     "accessControl": [17, 21],
-    "eespawn": [17, 21]
-}
-
+    "eespawn": [17, 21],
+};
 
 export interface PlaceConfig {
     map: L.Map;
     name: string;
     level: PlaceLevel;
     location: L.LatLngExpression;
+    layerGroup: L.LayerGroup;
 }
