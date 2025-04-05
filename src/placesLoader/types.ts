@@ -12,6 +12,15 @@ export type PlaceLevel =
     | "eespawn"//重生点
 ;
 
+export type RoadLevel =
+    | "roadway" //马路
+    | "railway"//铁路
+    | "pedestrianPath"//人行道
+    | "indoorPassage"//室内通道
+    | "shortcutPath"//捷径
+    | "stairway"//楼梯道路
+    | "ziplinePath"//滑索道
+;
 
 //[最小可见缩放级别, 最大可见缩放级别]
 export type VisibleZoomRange = [number, number];
