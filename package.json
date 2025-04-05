@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.1",
+    "@mui/material": "^7.0.1",
     "@types/leaflet-rotate": "^0.1.4",
     "leaflet": "^1.9.4",
     "leaflet-rotate": "https://github.com/rphlo/leaflet-rotate#touch-fix",
