@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3a5961;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.custom-tooltip{
+    color: white;
+    background-color: transparent;
+}
+  
