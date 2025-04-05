@@ -4,6 +4,7 @@
     height: 90vh;
     overflow: hidden;
     border-radius: 1rem;
+    position: relative;
 }
 
 @media (max-width: 768px) {
