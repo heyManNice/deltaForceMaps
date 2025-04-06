@@ -7,6 +7,8 @@ import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
 import { SxProps, Theme } from '@mui/material/styles';
+import { Ref } from "@src/utils";
+import { useEffect } from "react";
 
 const screenStyle: SxProps<Theme> = {
     position: "absolute",
@@ -19,7 +21,30 @@ const screenStyle: SxProps<Theme> = {
     }
 };
 
+  
+
 export default function() {
+    const topOffset = Ref(0);
+    function updateViewOnResize(){
+        const element = document.querySelector("body > div")!;
+        const height = element.clientHeight;
+        const width = element.clientWidth;
+        const ratio = height/width;
+
+        if(ratio > 2.1){
+            //疑似全屏幕手机进入全屏
+            topOffset.set(2); 
+        }else{
+            topOffset.set(0); 
+        }
+        
+    }
+    useEffect(() => {
+        window.addEventListener("resize", updateViewOnResize);
+        return () => {
+            window.removeEventListener("resize", updateViewOnResize); 
+        }
+    })
     return (
         //整个屏幕
         <Box sx={screenStyle}>
@@ -27,7 +52,7 @@ export default function() {
             <Box sx={{
                 position: 'absolute',
                 width: '100%',
-                top: '0',
+                top: topOffset.val+'rem',
                 display: 'flex',
                 justifyContent: 'center'
             }}>
@@ -45,7 +70,7 @@ export default function() {
             <Box sx={{
                 position: 'absolute',
                 right: 0,
-                top: '7rem'
+                top: 7+topOffset.val+'rem'
             }}>
                 <Controller />
             </Box>
