@@ -2,6 +2,8 @@ import L from 'leaflet';
 import style from './style.module.css';
 import { PlaceConfig,ZoomRange } from './types';
 
+import places from '@src/assets/places.geojson';
+
 
 function showPlaceMarker(place: PlaceConfig) {
     const marker = L.marker(place.location, {
@@ -68,15 +70,7 @@ function loadPlaces(map:L.Map,places:GeoJSON.GeometryObject) {
 
 
 function enalbe(map:L.Map){
-    fetch('./places.geojson')
-    .then(response => response.json())
-    .then((data)=>{
-        loadPlaces(map,data);
-    }).catch((error) => {
-        if(error.name === `TypeError` && error.message.includes(`'appendChild'`)){
-            console.warn("该问题只在react调试严格模式下发生并且不影响视图，有什么解决方案吗？\n",error);
-        }
-    });
+    loadPlaces(map,places);
 }
 
 function disable(){

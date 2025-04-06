@@ -1,6 +1,7 @@
 import L from "leaflet";
-import style from "./style.module.css";
 import { RoadLevel } from "./types";
+
+import roads from '@src/assets/roads.geojson';
 
 function styleCreator(level: RoadLevel | undefined) {
     switch (level) {
@@ -54,21 +55,7 @@ function loadRoads(map: L.Map, roads: GeoJSON.GeometryObject) {
 
 
 function enalbe(map: L.Map) {
-    fetch("./roads.geojson")
-        .then((response) => response.json())
-        .then((data) => {
-            loadRoads(map, data);
-        }).catch((error) => {
-            if (
-                error.name === `TypeError` &&
-                error.message.includes(`'appendChild'`)
-            ) {
-                console.warn(
-                    "该问题只在react调试严格模式下发生并且不影响视图，有什么解决方案吗？\n",
-                    error,
-                );
-            }
-        });
+    loadRoads(map, roads);
 }
 
 function disable() { }
