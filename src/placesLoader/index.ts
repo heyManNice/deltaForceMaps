@@ -6,11 +6,12 @@ import places from '@src/assets/places.geojson';
 
 
 function showPlaceMarker(place: PlaceConfig) {
+    const textStyle = style[place.level+'-text'];
     const marker = L.marker(place.location, {
         title: place.name,
         icon: L.divIcon({
             className: style[place.level],
-            html: `<div style="display: flex;justify-content: center;">${place.name}</div>`,
+            html: `<div style="display: flex;justify-content: center;"><span ${textStyle?'class="'+textStyle+'"':''}>${place.name}</span></div>`,
             iconSize: [32,32],
             iconAnchor: [16,16],
         }),

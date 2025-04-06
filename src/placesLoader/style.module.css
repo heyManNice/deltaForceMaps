@@ -1,7 +1,155 @@
-.official{
+.official-text{
     color: white;
     white-space: nowrap;
     font-size: 1.2rem;
     font-weight: 600;
-    opacity: 0.8;
+    opacity: 1;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+
+.unofficialL2-text{
+    position: relative;
+    display: block;
+    transform: translateY(2rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.unofficialL2::before{
+    content: "";
+    background-color: rgb(24, 174, 255);
+    border: 2px solid white;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.action-text{
+    position: relative;
+    display: block;
+    transform: translateY(2rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.action::before{
+    content: "";
+    background-color: rgb(255, 151, 24);
+    border: 2px solid white;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+
+.task-text{
+    position: relative;
+    display: block;
+    transform: translateY(2rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.task::before{
+    content: "";
+    background-color: rgb(5, 46, 251);
+    border: 2px solid white;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+
+
+.evacuate-text{
+    position: relative;
+    display: block;
+    transform: translateY(2rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.evacuate::before{
+    content: "";
+    background-color: rgb(11, 198, 29);
+    border: 2px solid white;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.supply-text{
+    position: relative;
+    display: block;
+    transform: translateY(2rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.supply::before{
+    content: "";
+    background-color: #EBC10F;
+    border: 2px solid white;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
