@@ -2,34 +2,25 @@ import L from "leaflet";
 import { RoadLevel } from "./types";
 
 import roads from "@src/assets/roads.geojson";
+import { roadStyles,extraRoadStyles } from "./roadStyles";
 
 function styleCreator(level: RoadLevel | undefined): L.PathOptions {
-    switch (level) {
-        case "roadway":
-            return { color: "#F4F5F7", weight: 6 ,lineCap:'butt'};
-        case "railway":
-            return { color: "#F4F5F7", weight: 3 ,lineCap:'butt'};
-        default:
-            return { color: "#F4F5F7", weight: 0.5,lineCap:'butt' };
+    if(level&&roadStyles[level]){
+        return JSON.parse(JSON.stringify(roadStyles[level]));
     }
+    return { color: "#F4F5F7", weight: 0.5,lineCap:'butt' };
 }
 
 /**
  * 用于内部创建道路样式
  */
 function extraStyleCreator(name: string): L.PathOptions {
-    switch (name) {
-        case "railway:cover":
-            return { 
-                color: "#000",
-                weight: 3,
-                lineCap:'butt',
-                dashArray: [30,30],
-            };
-        default:
-            return { color: "#F4F5F7", weight: 0.5 };
+    if(name&&extraRoadStyles[name]){
+        return JSON.parse(JSON.stringify(extraRoadStyles[name]));
     }
+    return { color: "#F4F5F7", weight: 0.5,lineCap:'butt' };
 }
+
 
 function updateStyle(map: L.Map, polyline: L.Polyline, style: L.PathOptions) {
     const zoom = map.getZoom();
