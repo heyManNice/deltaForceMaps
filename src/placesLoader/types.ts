@@ -9,6 +9,7 @@ export type PlaceLevel =
     | "switch" //拉闸点
     | "accessControl" //刷卡点
     | "eespawn" //重生点
+    | "evacuate" //撤离点
 ;
 
 //[最小可见缩放级别, 最大可见缩放级别]
@@ -20,14 +21,15 @@ export type VisibleZoomRange = [number, number];
 export const ZoomRange: Record<PlaceLevel, VisibleZoomRange> = {
     "official": [17, 19],
     "unofficialL1": [17, 21],
-    "unofficialL2": [17, 21],
-    "supply": [17, 21],
+    "unofficialL2": [20, 21],
+    "supply": [19, 21],
     "highValue": [17, 21],
-    "action": [17, 21],
-    "task": [17, 21],
+    "action": [19, 21],
+    "task": [18, 19],
     "switch": [17, 21],
     "accessControl": [17, 21],
     "eespawn": [17, 21],
+    "evacuate": [16, 21],
 };
 
 export interface PlaceConfig {
