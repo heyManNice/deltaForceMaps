@@ -29,12 +29,18 @@ function toggleFullscreen() {
     } else {
         document.exitFullscreen();
     }
-  }
-  
+}
 
 
 function buttonCreator(){
     const rotate = Ref(0);
+    const isMeasureActive = Ref(false);
+    function measure() {
+        eventBus.emit('UiLayerControl:measure',{
+            isActive:!isMeasureActive.val
+        });
+        isMeasureActive.set(!isMeasureActive.val)
+    }
 
     function rorateReset() {
         eventBus.emit('UiLayerControl:rotateReset');
@@ -63,7 +69,9 @@ function buttonCreator(){
             transform: `rotate(${inintialRotate+rotate.val}deg)`
             }} />
         </Button>,
-        <Button key="measure">
+        <Button key="measure" sx={{
+            backgroundColor:isMeasureActive.val?"#CE93D8":""
+        }} onClick={measure}>
             <StraightenIcon />
         </Button>,
         <Button key="layer">

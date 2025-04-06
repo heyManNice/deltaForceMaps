@@ -1,5 +1,6 @@
 import eventBus from "@src/eventBus";
 import L from "leaflet";
+import measurer from '@src/measurer';
 
 let gloablMap:L.Map|undefined = undefined;
 
@@ -69,11 +70,13 @@ function enalbe(map:L.Map){
     gloablMap = map;
     zoomInOut.enalbe();
     compass.enalbe();
+    measurer.enable(map);
 }
 
 function disable(){
     zoomInOut.disable();
     compass.disable();
+    measurer.disable();
     gloablMap = undefined;
 }
 
