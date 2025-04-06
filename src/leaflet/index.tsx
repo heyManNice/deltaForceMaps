@@ -6,6 +6,7 @@ import zoomMeter from "@src/zoomMeter";
 import placesLoader from '@src/placesLoader';
 import tilesLoader from "@src/tilesLoader";
 import roadsLoader from '@src/roadsLoader';
+import controller from '@src/uiLayer/controller/leafletPlugin';
 import layerController from '@src/layerController';
 
 import { useEffect, useRef} from 'react';
@@ -18,28 +19,8 @@ import "leaflet-rotate";
 const MapPlugins = [
     tilesLoader,
     placesLoader,
-    roadsLoader
-];
-
-const ControlPlugins = [
-    {
-        plugin:zoomMeter,
-        options:{
-            position: "topright"  
-        }
-    },
-    {
-        plugin:MeasurerControl,
-        options:{
-            position: "topleft"
-        }
-    },
-    {
-        plugin:layerController,
-        options:{
-            position: "topleft"
-        }
-    }
+    roadsLoader,
+    controller
 ];
 
 const defaultLocation:Location = [31.00123869701366, 121.00449874218026];
@@ -62,23 +43,21 @@ const MapComponent = () => {
         });
 
 
-        // 加载控件插件
-        /* for(let i=0;i<ControlPlugins.length;i++){
-            const plugin = ControlPlugins[i].plugin;
-            const options = ControlPlugins[i].options as L.ControlOptions;
-            map.addControl(new plugin(options));
-        } */
-
-        // 加载地图插件
+        // 加载插件
         for(let i=0;i<MapPlugins.length;i++){
             const plugin = MapPlugins[i];
-            plugin(map);
+            plugin.enalbe(map);
         }
 
         map.on('click', (e) => {
             console.log(`纬经:[${e.latlng.lat},${e.latlng.lng}]`);
         })
         return () => {
+            // 移除
+            for(let i=0;i<MapPlugins.length;i++){
+                const plugin = MapPlugins[i];
+                plugin.disable();
+            }
             map.remove();
         };
     }, []);

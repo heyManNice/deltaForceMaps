@@ -52,7 +52,8 @@ function loadRoads(map: L.Map, roads: GeoJSON.GeometryObject) {
     });
 }
 
-export default function (map: L.Map) {
+
+function enalbe(map: L.Map) {
     fetch("./roads.geojson")
         .then((response) => response.json())
         .then((data) => {
@@ -68,4 +69,11 @@ export default function (map: L.Map) {
                 );
             }
         });
+}
+
+function disable() { }
+
+export default {
+    enalbe,
+    disable,
 }

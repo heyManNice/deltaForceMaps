@@ -67,7 +67,7 @@ function loadPlaces(map:L.Map,places:GeoJSON.GeometryObject) {
 }
 
 
-export default function(map:L.Map){
+function enalbe(map:L.Map){
     fetch('./places.geojson')
     .then(response => response.json())
     .then((data)=>{
@@ -77,4 +77,13 @@ export default function(map:L.Map){
             console.warn("该问题只在react调试严格模式下发生并且不影响视图，有什么解决方案吗？\n",error);
         }
     });
+}
+
+function disable(){
+    
+}
+
+export default {
+    enalbe,
+    disable
 }
