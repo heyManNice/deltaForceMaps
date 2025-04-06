@@ -42,8 +42,8 @@ export default function() {
             {/* 控制器 */}
             <Box sx={{
                 position: 'absolute',
-                left: '4%',
-                top: '10rem'
+                right: 0,
+                top: '7rem'
             }}>
                 <Controller />
             </Box>
