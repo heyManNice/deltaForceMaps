@@ -1,13 +1,10 @@
 import L from 'leaflet';
 import style from "./style.module.css"
 
-import MeasurerControl from "@src/measurer";
-import zoomMeter from "@src/zoomMeter";
 import placesLoader from '@src/placesLoader';
 import tilesLoader from "@src/tilesLoader";
 import roadsLoader from '@src/roadsLoader';
 import controller from '@src/uiLayer/controller/leafletPlugin';
-import layerController from '@src/layerController';
 
 import { useEffect, useRef} from 'react';
 import { Location } from './types';
