@@ -1,7 +1,6 @@
-import * as React from 'react';
+
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import Box from '@mui/material/Box';
 
 import StraightenIcon from '@mui/icons-material/Straighten';
 import LayersIcon from '@mui/icons-material/Layers';
@@ -10,16 +9,28 @@ import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ExploreIcon from '@mui/icons-material/Explore';
 
+import eventBus from "@src/eventBus";
+
+const inintialRotate = -45;
+
+function zoomIn() {
+  eventBus.emit('UiLayerControl:zoomIn');
+}
+function zoomOut() {
+    eventBus.emit('UiLayerControl:zoomOut'); 
+}
 
 const buttons = [
-  <Button key="zoomin">
+  <Button key="zoomin" onClick={zoomIn}>
     <ZoomInIcon />
   </Button>,
-  <Button key="zoomout">
+  <Button key="zoomout" onClick={zoomOut}>
     <ZoomOutIcon />
   </Button>,
   <Button key="compass">
-    <ExploreIcon />
+    <ExploreIcon sx={{
+      transform: `rotate(${inintialRotate}deg)`
+    }} />
   </Button>,
   <Button key="measure">
     <StraightenIcon />
