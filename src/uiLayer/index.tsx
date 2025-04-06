@@ -1,20 +1,42 @@
 
-import style from "./style.module.css"
 import Navigation from "./navigation"
 import SearchBox from "./searchBox"
 import Box from '@mui/material/Box';
 import Controller from "./controller"
+import { SxProps, Theme } from '@mui/material/styles';
 
+
+const screenStyle: SxProps<Theme> = {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    zIndex: 999999,
+    pointerEvents: "none"
+};
 
 export default function() {
     return (
-        <div className={style.screen}>
-            <div className={style.top}>
+        //整个屏幕
+        <Box sx={screenStyle}>
+            {/* 搜索框 */}
+            <Box sx={{
+                position: 'absolute',
+                width: '100%',
+                top: '0',
+                display: 'flex',
+                justifyContent: 'center',
+            }}>
                 <SearchBox />
-            </div>
-            <div className={style.bottom}>
+            </Box>
+            {/* 底部导航 */}
+            <Box sx={{
+                position: 'absolute',
+                width: '100%',
+                bottom: '0',
+            }}>
                 <Navigation />
-            </div>
+            </Box>
+            {/* 控制器 */}
             <Box sx={{
                 position: 'absolute',
                 left: '4%',
@@ -22,6 +44,6 @@ export default function() {
             }}>
                 <Controller />
             </Box>
-        </div>
+        </Box>
     )
 }
