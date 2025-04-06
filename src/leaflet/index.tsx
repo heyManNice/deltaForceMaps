@@ -54,19 +54,20 @@ const MapComponent = () => {
         const map = L.map(element, {
             center: defaultLocation,
             zoom: 20,
-            zoomControl: true,
+            zoomControl: false,
+            rotateControl: false,
             rotate: true,
             touchRotate: true,
-            preferCanvas: true
+            preferCanvas: true,
         });
 
 
         // 加载控件插件
-        for(let i=0;i<ControlPlugins.length;i++){
+        /* for(let i=0;i<ControlPlugins.length;i++){
             const plugin = ControlPlugins[i].plugin;
             const options = ControlPlugins[i].options as L.ControlOptions;
             map.addControl(new plugin(options));
-        }
+        } */
 
         // 加载地图插件
         for(let i=0;i<MapPlugins.length;i++){
