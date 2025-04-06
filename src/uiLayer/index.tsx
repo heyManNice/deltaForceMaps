@@ -3,8 +3,10 @@ import Navigation from "./navigation"
 import SearchBox from "./searchBox"
 import Box from '@mui/material/Box';
 import Controller from "./controller"
-import { SxProps, Theme } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
+import NavigationIcon from '@mui/icons-material/Navigation';
 
+import { SxProps, Theme } from '@mui/material/styles';
 
 const screenStyle: SxProps<Theme> = {
     position: "absolute",
@@ -47,6 +49,15 @@ export default function() {
             }}>
                 <Controller />
             </Box>
+            {/* 浮动按钮导航 */}
+            <Fab variant="extended" sx={{
+                position: 'absolute',
+                right: '1rem',
+                bottom: '6rem',
+            }}>
+                <NavigationIcon sx={{ mr: 1 }} />
+                导航
+            </Fab>
         </Box>
     )
 }
