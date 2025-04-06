@@ -7,8 +7,7 @@ class EventBus {
    * @param callback 回调函数
    */
   public on<T = unknown>(event: string, callback: EventCallback<T>): void {
-    const wrappedCallback = (e: CustomEvent<T>) => callback(e.detail);
-    window.addEventListener(event, wrappedCallback as EventListener);
+    window.addEventListener(event, callback as EventListener);
   }
 
   /**
@@ -27,8 +26,7 @@ class EventBus {
    * @param callback 要移除的回调函数
    */
   public off<T = unknown>(event: string, callback: EventCallback<T>): void {
-    const wrappedCallback = (e: CustomEvent<T>) => callback(e.detail);
-    window.removeEventListener(event, wrappedCallback as EventListener);
+    window.removeEventListener(event, callback as EventListener);
   }
 }
 
