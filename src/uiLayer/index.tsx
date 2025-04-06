@@ -25,6 +25,7 @@ export default function() {
                 top: '0',
                 display: 'flex',
                 justifyContent: 'center',
+                pointerEvents: 'all'
             }}>
                 <SearchBox />
             </Box>
@@ -33,6 +34,7 @@ export default function() {
                 position: 'absolute',
                 width: '100%',
                 bottom: '0',
+                pointerEvents: 'all'
             }}>
                 <Navigation />
             </Box>
@@ -40,7 +42,8 @@ export default function() {
             <Box sx={{
                 position: 'absolute',
                 left: '4%',
-                top: '10rem'
+                top: '10rem',
+                pointerEvents: 'all'
             }}>
                 <Controller />
             </Box>
