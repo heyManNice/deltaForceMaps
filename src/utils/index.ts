@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import { Location,loadImageConfig } from '../leaflet/types';
+import { useState } from 'react';
 
 
 export function print(...args: any[]) {
@@ -26,4 +27,14 @@ export function loadImage(config: loadImageConfig): L.ImageOverlay {
         endPoint
     ];
     return L.imageOverlay(config.imageUrl, imageBounds);
+}
+
+export function Ref<T>(initialValue: T) {
+  const [value, setter] = useState(initialValue);
+  return {
+    val: value,
+    set: (newValue: T) => {
+      setter(newValue);
+    },
+  };
 }
