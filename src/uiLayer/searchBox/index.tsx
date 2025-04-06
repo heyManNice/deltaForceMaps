@@ -11,15 +11,15 @@ export default function() {
   return (
     <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+      sx={{ p: '4px 4px', display: 'flex', alignItems: 'center', width: '90%' ,marginTop:"1rem"}}
     >
       <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />
       </IconButton>
       <InputBase
         sx={{ ml: 1, flex: 1 }}
-        placeholder="Search Maps"
-        inputProps={{ 'aria-label': 'search google maps' }}
+        placeholder="最近的卫星刷新点在哪里?"
+        inputProps={{ 'aria-label': '最近的卫星刷新点在哪里?' }}
       />
       <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />
