@@ -11,7 +11,7 @@ export default function() {
   return (
     <Paper
       component="form"
-      sx={{ p: '4px 4px', display: 'flex', alignItems: 'center', width: '90%' ,marginTop:"1rem"}}
+      sx={{ p: '4px 4px', display: 'flex', alignItems: 'center',flex:'1 0 0' ,marginTop:"1rem",marginLeft:"1rem",marginRight:"1rem"}}
     >
       <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />
