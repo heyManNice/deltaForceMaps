@@ -18,7 +18,7 @@ export type VisibleZoomRange = [number, number];
  * 不同级别缩放范围
  */
 export const ZoomRange: Record<PlaceLevel, VisibleZoomRange> = {
-    "official": [18, 20],
+    "official": [17, 19],
     "unofficialL1": [17, 21],
     "unofficialL2": [17, 21],
     "supply": [17, 21],
