@@ -10,38 +10,61 @@ import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ExploreIcon from '@mui/icons-material/Explore';
 
 import eventBus from "@src/eventBus";
+import { Ref } from '@src/utils';
 
 const inintialRotate = -45;
 
 function zoomIn() {
   eventBus.emit('UiLayerControl:zoomIn');
 }
+
 function zoomOut() {
     eventBus.emit('UiLayerControl:zoomOut'); 
 }
 
-const buttons = [
-  <Button key="zoomin" onClick={zoomIn}>
-    <ZoomInIcon />
-  </Button>,
-  <Button key="zoomout" onClick={zoomOut}>
-    <ZoomOutIcon />
-  </Button>,
-  <Button key="compass">
-    <ExploreIcon sx={{
-      transform: `rotate(${inintialRotate}deg)`
-    }} />
-  </Button>,
-  <Button key="measure">
-    <StraightenIcon />
-  </Button>,
-  <Button key="layer">
-    <LayersIcon />
-  </Button>,
-  <Button key="fullscreen">
-    <ZoomOutMapIcon />
-  </Button>
-];
+
+function buttonCreator(){
+    const rotate = Ref(0);
+
+    function rorateReset() {
+        eventBus.emit('UiLayerControl:rotateReset');
+        rotate.set(0);
+    }
+
+    eventBus.on('UiLayerControl:rotate', (event:CustomEvent) => {
+        const r = event.detail;
+        if(isNaN(r)){
+            console.warn(`UiLayerControl:rotate event.detail '${r}' is not a number`);
+            return;
+        }
+        rotate.set(r);
+    })
+
+    return (
+        [
+        <Button key="zoomin" onClick={zoomIn}>
+            <ZoomInIcon />
+        </Button>,
+        <Button key="zoomout" onClick={zoomOut}>
+            <ZoomOutIcon />
+        </Button>,
+        <Button key="compass" onClick={rorateReset}>
+            <ExploreIcon sx={{
+            transform: `rotate(${inintialRotate+rotate.val}deg)`
+            }} />
+        </Button>,
+        <Button key="measure">
+            <StraightenIcon />
+        </Button>,
+        <Button key="layer">
+            <LayersIcon />
+        </Button>,
+        <Button key="fullscreen">
+            <ZoomOutMapIcon />
+        </Button>
+        ]
+    );
+}
 
 export default function GroupOrientation() {
   return (
@@ -51,7 +74,7 @@ export default function GroupOrientation() {
         variant="contained"
         sx={{ width: '32px',marginRight:"1.5rem"}}
       >
-        {buttons}
+        {buttonCreator()}
       </ButtonGroup>
   );
 }
