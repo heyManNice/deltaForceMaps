@@ -32,6 +32,10 @@ function toggleFullscreen() {
 }
 
 
+function layerSelectorControllerClick(){
+    eventBus.emit("layerSelector:ControllerClick");
+}
+
 function buttonCreator(){
     const rotate = Ref(0);
     const isMeasureActive = Ref(false);
@@ -61,22 +65,32 @@ function buttonCreator(){
         <Button key="zoomin" onClick={zoomIn}>
             <ZoomInIcon />
         </Button>,
+
+
         <Button key="zoomout" onClick={zoomOut}>
             <ZoomOutIcon />
         </Button>,
+
+
         <Button key="compass" onClick={rorateReset}>
             <ExploreIcon sx={{
             transform: `rotate(${inintialRotate+rotate.val}deg)`
             }} />
         </Button>,
+
+
         <Button key="measure" sx={{
             backgroundColor:isMeasureActive.val?"#CE93D8":""
         }} onClick={measure}>
             <StraightenIcon />
         </Button>,
-        <Button key="layer">
+
+
+        <Button key="layer" onClick={layerSelectorControllerClick}>
             <LayersIcon />
         </Button>,
+
+        
         <Button key="fullscreen" onClick={toggleFullscreen}>
             <ZoomOutMapIcon />
         </Button>

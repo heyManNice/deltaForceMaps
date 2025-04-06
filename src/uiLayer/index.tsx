@@ -6,6 +6,8 @@ import Controller from "./controller"
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
+import LayerSelector from '@src/uiLayer/layerSelector'
+
 import { SxProps, Theme } from '@mui/material/styles';
 import { Ref } from "@src/utils";
 import { useEffect } from "react";
@@ -48,6 +50,7 @@ export default function() {
     return (
         //整个屏幕
         <Box sx={screenStyle}>
+            <LayerSelector></LayerSelector>
             {/* 搜索框 */}
             <Box sx={{
                 position: 'absolute',
