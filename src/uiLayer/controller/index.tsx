@@ -22,6 +22,16 @@ function zoomOut() {
     eventBus.emit('UiLayerControl:zoomOut'); 
 }
 
+function toggleFullscreen() {
+    const element = document.body;
+    if (!document.fullscreenElement) {
+        element.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+  }
+  
+
 
 function buttonCreator(){
     const rotate = Ref(0);
@@ -59,7 +69,7 @@ function buttonCreator(){
         <Button key="layer">
             <LayersIcon />
         </Button>,
-        <Button key="fullscreen">
+        <Button key="fullscreen" onClick={toggleFullscreen}>
             <ZoomOutMapIcon />
         </Button>
         ]
