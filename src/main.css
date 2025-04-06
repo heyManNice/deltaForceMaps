@@ -15,8 +15,7 @@ body{
     user-select: none;
 }
 
-.custom-tooltip{
-    color: white;
-    background-color: transparent;
+.leaflet-overlay-pane{
+    opacity: 0.5;
 }
   
