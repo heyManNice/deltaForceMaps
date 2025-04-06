@@ -8,7 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function(){
     return (
-        <BottomNavigation showLabels>
+        <BottomNavigation showLabels sx={{ p: '10px' }} >
             <BottomNavigationAction label="首页" icon={<HomeIcon />} />
             <BottomNavigationAction label="最近" icon={<RestoreIcon />} />
             <BottomNavigationAction label="我的" icon={<LocationOnIcon />} />
