@@ -11,7 +11,10 @@ const screenStyle: SxProps<Theme> = {
     width: "100%",
     height: "100%",
     zIndex: 999999,
-    pointerEvents: "none"
+    pointerEvents: "none",
+    '& > *': {
+        pointerEvents: "all" 
+    }
 };
 
 export default function() {
@@ -24,8 +27,7 @@ export default function() {
                 width: '100%',
                 top: '0',
                 display: 'flex',
-                justifyContent: 'center',
-                pointerEvents: 'all'
+                justifyContent: 'center'
             }}>
                 <SearchBox />
             </Box>
@@ -33,8 +35,7 @@ export default function() {
             <Box sx={{
                 position: 'absolute',
                 width: '100%',
-                bottom: '0',
-                pointerEvents: 'all'
+                bottom: '0'
             }}>
                 <Navigation />
             </Box>
@@ -42,8 +43,7 @@ export default function() {
             <Box sx={{
                 position: 'absolute',
                 left: '4%',
-                top: '10rem',
-                pointerEvents: 'all'
+                top: '10rem'
             }}>
                 <Controller />
             </Box>
