@@ -3,6 +3,8 @@
 "name": "places",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
+{ "type": "Feature", "properties": { "id": null, "Name": "发射区", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.00439924852742, 31.001615554817143 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "水平试车间", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.007110314561686, 31.002253155321007 ] } },
 { "type": "Feature", "properties": { "id": null, "Name": "东区吊桥", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.007079990839969, 31.003860017432103 ] } },
 { "type": "Feature", "properties": { "id": null, "Name": "罐装区", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.008254430973821, 31.004017160830294 ] } },
 { "type": "Feature", "properties": { "id": null, "Name": "吊装室", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.00750386447983, 31.005259834281784 ] } },
@@ -19,7 +21,20 @@
 { "type": "Feature", "properties": { "id": null, "Name": "总裁室", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.005440691127305, 31.004374867392929 ] } },
 { "type": "Feature", "properties": { "id": null, "Name": "蓝室", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.006090843219567, 31.004835564337302 ] } },
 { "type": "Feature", "properties": { "id": null, "Name": "黑室", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.006104301781988, 31.004099484500326 ] } },
-{ "type": "Feature", "properties": { "id": null, "Name": "发射区", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.00439924852742, 31.001615554817143 ] } },
-{ "type": "Feature", "properties": { "id": null, "Name": "水平试车间", "level": "official" }, "geometry": { "type": "Point", "coordinates": [ 121.007110314561686, 31.002253155321007 ] } }
+{ "type": "Feature", "properties": { "id": null, "Name": "跳跳乐", "level": "unofficialL2" }, "geometry": { "type": "Point", "coordinates": [ 121.006545514379198, 31.00351426310753 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "盾构得吃点", "level": "unofficialL2" }, "geometry": { "type": "Point", "coordinates": [ 121.006590549891655, 31.003543085835485 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "跳水撤离点", "level": "unofficialL2" }, "geometry": { "type": "Point", "coordinates": [ 121.006591836620601, 31.00362157630007 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "红狼手炮炸西区", "level": "action" }, "geometry": { "type": "Point", "coordinates": [ 121.003437806673745, 31.005194988432489 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "红狼手炮炸火箭", "level": "action" }, "geometry": { "type": "Point", "coordinates": [ 121.0043760894076, 31.001646704742285 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "红狼手炮炸火箭", "level": "action" }, "geometry": { "type": "Point", "coordinates": [ 121.005050335365581, 31.001331198809293 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "红狼手炮炸二通", "level": "action" }, "geometry": { "type": "Point", "coordinates": [ 121.007181673160886, 31.006149741296642 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "直升机撤离点", "level": "evacuate" }, "geometry": { "type": "Point", "coordinates": [ 121.005839872235427, 31.003220631566311 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "丢弃背包撤离点", "level": "evacuate" }, "geometry": { "type": "Point", "coordinates": [ 121.007436188142748, 31.001968901665737 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "飞升撤离点", "level": "evacuate" }, "geometry": { "type": "Point", "coordinates": [ 121.004532298299381, 31.000958047420369 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "火箭提前撤离电脑", "level": "unofficialL2" }, "geometry": { "type": "Point", "coordinates": [ 121.004359876623113, 31.001211275673285 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "飞升者行动任务", "level": "task" }, "geometry": { "type": "Point", "coordinates": [ 121.00655220536963, 31.003415184980135 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "桥上狙击兵", "level": "unofficialL2" }, "geometry": { "type": "Point", "coordinates": [ 121.006526470791087, 31.003333863711923 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "航空箱", "level": "supply" }, "geometry": { "type": "Point", "coordinates": [ 121.006639702936724, 31.005254177963177 ] } },
+{ "type": "Feature", "properties": { "id": null, "Name": "狙击西区点", "level": "action" }, "geometry": { "type": "Point", "coordinates": [ 121.003930881198769, 31.001476341832326 ] } }
 ]
 }
