@@ -5,6 +5,7 @@ import placesLoader from '@src/placesLoader';
 import tilesLoader from "@src/tilesLoader";
 import roadsLoader from '@src/roadsLoader';
 import controller from '@src/uiLayer/controller/leafletPlugin';
+import onlinePlacesLoader from '@src/onlinePlacesLoader';
 
 import { useEffect, useRef} from 'react';
 import { Location } from './types';
@@ -18,7 +19,8 @@ const MapPlugins = [
     tilesLoader,
     placesLoader,
     roadsLoader,
-    controller
+    controller,
+    onlinePlacesLoader
 ];
 
 const defaultLocation:Location = [31.00123869701366, 121.00449874218026];

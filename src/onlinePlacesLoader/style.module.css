@@ -1,0 +1,27 @@
+.online-place-text{
+    position: relative;
+    display: block;
+    transform: translateY(1.6rem);
+    color: white;
+    white-space: nowrap;
+    font-size: 1rem;
+    text-shadow: 
+    -1px -1px 0 black,  /* 左上 */
+    1px -1px 0 black,   /* 右上 */
+    -1px 1px 0 black,   /* 左下 */
+    1px 1px 0 black;    /* 右下 */
+}
+.online-place::before{
+    content: "";
+    background-color: #CE93D8;
+    border: 1px solid white;
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
