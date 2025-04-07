@@ -71,7 +71,7 @@ function layerSelector() {
         eventBus.emit("layerSelector:confirm",data);
         layers.length=0;
     }
-    function onControllerClick(){
+    function onOpenLayerSelector(){
         eventBus.emit("layerSelector:getNewLayersData");
         isOpen.set(true);
     }
@@ -83,10 +83,10 @@ function layerSelector() {
     }
 
     useEffect(()=>{
-        eventBus.on("layerSelector:ControllerClick",onControllerClick);
+        eventBus.on("layerSelector:openLayerSelector",onOpenLayerSelector);
         eventBus.on("layerSelector:layerOnload",layerOnload);
         return ()=>{
-            eventBus.off("layerSelector:ControllerClick",onControllerClick);
+            eventBus.off("layerSelector:openLayerSelector",onOpenLayerSelector);
             eventBus.off("layerSelector:layerOnload",layerOnload);
         }
     });

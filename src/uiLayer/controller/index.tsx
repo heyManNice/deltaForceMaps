@@ -32,8 +32,8 @@ function toggleFullscreen() {
 }
 
 
-function layerSelectorControllerClick(){
-    eventBus.emit("layerSelector:ControllerClick");
+function openLayerSelector(){
+    eventBus.emit("layerSelector:openLayerSelector");
 }
 
 function buttonCreator(){
@@ -86,7 +86,7 @@ function buttonCreator(){
         </Button>,
 
 
-        <Button key="layer" onClick={layerSelectorControllerClick}>
+        <Button key="layer" onClick={openLayerSelector}>
             <LayersIcon />
         </Button>,
 
