@@ -10,6 +10,7 @@ import { useEffect, useRef} from 'react';
 import { Location } from './types';
 
 
+
 import 'leaflet/dist/leaflet.css';
 import "leaflet-rotate";
 
@@ -29,6 +30,9 @@ const MapComponent = () => {
     useEffect(() => {
         const element = elementRef.current!;
         element.style.backgroundColor = "#111D27";
+
+        L.Icon.Default.imagePath = '/leaflet/images/';
+
         const map = L.map(element, {
             center: defaultLocation,
             zoom: 20,
