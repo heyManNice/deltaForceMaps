@@ -125,9 +125,6 @@ function addMarker(issue:any){
             render();
         });
     }
-    if(gloablMap){
-        markerGroup.addTo(gloablMap);
-    }
 }
 
 
@@ -149,6 +146,7 @@ function fetchOnZoomed(){
 function enalbe(map:L.Map){
     gloablMap = map;
     map.on("zoomend",fetchOnZoomed);
+    markerGroup.addTo(map);
 }
 
 function disable(){
