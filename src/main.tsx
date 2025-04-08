@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+//import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Phone from './phone'
 import './main.css'
@@ -17,7 +17,5 @@ window.addEventListener("load", () => {
 })
 
 createRoot(document.body!).render(
-  <StrictMode>
-    <Phone />
-  </StrictMode>
+  <Phone />
 )
