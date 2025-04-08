@@ -7,6 +7,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
+import { onlinePlaces, loadOnlinePlaces } from '@src/onlinePlacesLoader';
+
 import { map } from "@src/leaflet"
 
 
@@ -34,11 +36,12 @@ function parsePlace(places: any) {
             level: place.properties.Level,
             location: [place.geometry.coordinates[1], place.geometry.coordinates[0]],
             icon: <PlaceIcon sx={{
-                margin:'0 1rem'
+                margin: '0 1rem'
             }} />,
         };
     });
 }
+
 
 
 
@@ -50,12 +53,35 @@ export default function SearchResult({
         set: (newValue: string) => void;
     }
 }) {
+    if (searchInputvalue.val === "") return <></>;
     const items = parsePlace(searchPlaces(searchInputvalue.val));
+
+    if (onlinePlaces.length === 0) {
+        loadOnlinePlaces();
+    }
+
+    const onlinePlacesResult = [];
+
+    if (onlinePlaces.length > 0) {
+        for (const user of onlinePlaces) {
+            for (const j of user.locationDatas) {
+                if (!j.name.includes(searchInputvalue.val.trim())) {
+                    continue;
+                }
+                onlinePlacesResult.push({
+                    Name: j.name.replace(searchInputvalue.val.trim(), `<b>${searchInputvalue.val.trim()}</b>`),
+                    level: 'null',
+                    location: j.location,
+                    icon: <img src={user.avatarUrl} alt={user.userName} style={{ width: '20px', height: '20px', borderRadius: '50%',paddingLeft:'2px', margin: '0 1rem' }} />,
+                });
+            }
+        }
+    }
+
     function itemClickHandler(item: any) {
         searchInputvalue.set("");
-        map!.flyTo(item.location,20);
+        map!.flyTo(item.location, 20);
     }
-    if (searchInputvalue.val === "") return <></>;
     return (
         <Box sx={{
             bgcolor: 'background.paper',
@@ -67,6 +93,18 @@ export default function SearchResult({
             position: 'relative',
         }}>
             <List>
+                {onlinePlacesResult.length > 0 && onlinePlacesResult.map((item: any, index: number) => (
+                    <ListItem key={index} disablePadding>
+                        <ListItemButton onClick={() => { itemClickHandler(item) }}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText
+                                primary={
+                                    <span dangerouslySetInnerHTML={{ __html: item.Name }} />
+                                }
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
                 {items.length > 0 && items.map((item: any, index: number) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton onClick={() => { itemClickHandler(item) }}>
@@ -84,7 +122,7 @@ export default function SearchResult({
                         <ListItemText sx={{
                             textAlign: 'center',
                         }}
-                        primary="没有找到相关地点" />
+                            primary="没有找到相关地点" />
                     </ListItem>)}
             </List>
         </Box>

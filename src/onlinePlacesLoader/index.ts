@@ -1,7 +1,20 @@
 import L from 'leaflet';
 import style from './style.module.css';
+import { debounce } from '@src/utils';
 
 const api = `https://api.github.com/repos/heyManNice/deltaForceMaps/issues`;
+
+type OnlinePlace = {
+    htmlUrl:string,
+    userName:string,
+    avatarUrl:string,
+    locationDatas:{
+        name:string,
+        location:L.LatLngExpression,
+    }[]
+}
+
+export const onlinePlaces:OnlinePlace[] = [];
 
 const zoomRange = [20,21];
 
@@ -10,22 +23,7 @@ const markerGroup = L.layerGroup(void 0,{
     pane: "用户上传地标",
 });
 
-/**
- * 防抖函数
- * @param callback 回调函数
- * @param delay 延迟时间
- */
-function debounce(callback:Function, delay:number = 1000){
-    let timer:any = null;
-    return function(...args:any){
-        if(timer){
-            clearTimeout(timer);
-        }
-        timer = setTimeout(() => {
-            callback(...args);
-        }, delay);
-    }
-}
+
 
 function parseIssue(){
     fetch(api).then((res) => {
@@ -84,6 +82,12 @@ function addMarker(issue:any){
     const userName = issue.user.login??"未知用户";
     const avatarUrl = issue.user.avatar_url??"";
     const locationDatas = parseLocation(issue.body);
+    onlinePlaces.push({
+        htmlUrl,
+        userName,
+        avatarUrl,
+        locationDatas,
+    });
     for(let i=0;i<locationDatas.length;i++){
         const locationData = locationDatas[i];
         const marker = L.marker(locationData.location,{
@@ -130,10 +134,16 @@ function addMarker(issue:any){
 
 const debouncedParseIssue = debounce(parseIssue, 50);
 
+let loaded = false;
+
 function fetchOnZoomed(){
     if(!gloablMap){
         return;
     }
+    if(loaded){
+        return;
+    }
+    loaded = true;
     const zoom = gloablMap.getZoom();
     if(zoom >= zoomRange[0] && zoom <= zoomRange[1]){
         debouncedParseIssue();
@@ -141,6 +151,9 @@ function fetchOnZoomed(){
     }
 }
 
+export function loadOnlinePlaces(){
+    fetchOnZoomed();
+}
 
 
 function enalbe(map:L.Map){
@@ -157,6 +170,7 @@ function disable(){
     markerGroup.remove();
     markerGroup.clearLayers();
     gloablMap = null;
+    loaded = false;
 }
 
 export default {
