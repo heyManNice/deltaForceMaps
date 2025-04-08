@@ -3,6 +3,8 @@ import style from './style.module.css';
 
 const api = `https://api.github.com/repos/heyManNice/deltaForceMaps/issues`;
 
+const zoomRange = [20,21];
+
 let gloablMap:L.Map|null = null;
 const markerGroup = L.layerGroup(void 0,{
     pane: "用户上传地标",
@@ -102,9 +104,9 @@ function addMarker(issue:any){
         </div>`);
 
         let isShow = false;
-        gloablMap?.on("zoomend",()=>{
+        function render(){
             const zoom = gloablMap?.getZoom()??0;
-            if(zoom >= 19 && zoom <=21){
+            if(zoom >= zoomRange[0] && zoom <=zoomRange[1]){
                 if(!isShow){
                     marker.addTo(markerGroup);
                     isShow = true;
@@ -115,6 +117,12 @@ function addMarker(issue:any){
                     isShow = false;
                 }
             }
+        }
+
+        render();
+
+        gloablMap?.on("zoomend",()=>{
+            render();
         });
     }
     if(gloablMap){
@@ -122,18 +130,35 @@ function addMarker(issue:any){
     }
 }
 
-const debouncedParseIssue = debounce(parseIssue, 1000);
+
+const debouncedParseIssue = debounce(parseIssue, 50);
+
+function fetchOnZoomed(){
+    if(!gloablMap){
+        return;
+    }
+    const zoom = gloablMap.getZoom();
+    if(zoom >= zoomRange[0] && zoom <= zoomRange[1]){
+        debouncedParseIssue();
+        gloablMap.off("zoomend",fetchOnZoomed);
+    }
+}
+
+
 
 function enalbe(map:L.Map){
     gloablMap = map;
-    debouncedParseIssue();
+    map.on("zoomend",fetchOnZoomed);
 }
 
 function disable(){
-    /* gloablMap = null;
+    if(!gloablMap){
+        return;
+    }
+    gloablMap.off("zoomend",fetchOnZoomed);
     markerGroup.remove();
     markerGroup.clearLayers();
-    console.log("移除在线地标"); */
+    gloablMap = null;
 }
 
 export default {
