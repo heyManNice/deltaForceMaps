@@ -42,6 +42,7 @@ export function getReady(){
         const interval = setInterval(()=>{
             tryCount++;
             if(tryCount > 100){
+                clearInterval(interval);
                 throw new Error("地图获取失败，请联系开发者");
             }
             if(map){
