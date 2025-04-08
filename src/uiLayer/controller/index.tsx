@@ -59,7 +59,7 @@ function uploadPlace(){
     if(!map){
         return;
     }
-    const marker = L.marker([map.getCenter().lat, map.getCenter().lng]).addTo(map);
+    L.marker([map.getCenter().lat, map.getCenter().lng]).addTo(map);
 }
 
 function buttonCreator(){
