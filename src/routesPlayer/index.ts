@@ -166,7 +166,8 @@ function showUI(){
     setTimeout(()=>{
         div.style.bottom = "0";
     });
-    div.querySelector("#playBtn")!.onclick=()=>{
+    const btn = div.querySelector("#playBtn")! as HTMLButtonElement;
+    btn.onclick=()=>{
         play();
         div.style.bottom = "-40rem";
         setTimeout(()=>{
