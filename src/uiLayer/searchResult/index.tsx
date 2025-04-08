@@ -7,9 +7,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
+import NavigationIcon from '@mui/icons-material/Navigation';
+
 import { onlinePlaces, loadOnlinePlaces } from '@src/onlinePlacesLoader';
 
 import { map } from "@src/leaflet"
+
+import {preview} from '@src/routesPlayer';
 
 
 import _places from "@src/assets/places.geojson";
@@ -93,6 +97,25 @@ export default function SearchResult({
             position: 'relative',
         }}>
             <List>
+                {"发射区-离心室".includes(searchInputvalue.val.trim()) && (
+                    <ListItem disablePadding>
+                    <ListItemButton onClick={() => { 
+                        searchInputvalue.set("");
+                        preview();
+                        }}>
+                        <ListItemIcon>
+                            <NavigationIcon sx={{
+                                margin: '0 1rem'
+                            }} />
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={
+                                <span dangerouslySetInnerHTML={{ __html: "发射区-离心室".replace(searchInputvalue.val.trim(), `<b>${searchInputvalue.val.trim()}</b>`) }} />
+                            }
+                        />
+                    </ListItemButton>
+                </ListItem>
+                )}
                 {onlinePlacesResult.length > 0 && onlinePlacesResult.map((item: any, index: number) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton onClick={() => { itemClickHandler(item) }}>
