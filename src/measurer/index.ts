@@ -1,5 +1,5 @@
 import L from 'leaflet';
-import {map} from '@src/leaflet';
+import {map,getReady} from '@src/leaflet';
 
 let isActive = false;
 
@@ -58,15 +58,10 @@ function measure(event: L.LeafletMouseEvent){
     }
 }
 
-function initMeasure(){
-    if(map){
-        map.on('click', measure);
-    }else{
-        setTimeout(initMeasure, 500);
-    }
-}
 
-initMeasure();
+getReady().then((_map)=>{
+    map!.on('click', measure);
+});
 
 export function onMeasureClick(active:boolean) {
     if(!map){

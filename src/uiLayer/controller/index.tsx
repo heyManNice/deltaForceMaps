@@ -12,7 +12,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import L from 'leaflet';
 
-import {map} from '@src/leaflet';
+import {map,getReady} from '@src/leaflet';
 
 import eventBus from "@src/eventBus";
 import { Ref } from '@src/utils';
@@ -72,16 +72,11 @@ function buttonCreator(){
     }
 
     //指南针
-    function initRotateCallback(){
-        if(map){
-            map.on('rotate', (e) => {
-                rotate.set(e.target.getBearing());
-            });
-        }else{
-            setTimeout(initRotateCallback,500);
-        }
-    }
-    initRotateCallback();
+    getReady().then(()=>{
+        map!.on('rotate', (e) => {
+            rotate.set(e.target.getBearing());
+        });
+    });
 
     function rorateReset() {
         if(!map){
