@@ -86,7 +86,7 @@ function addMarker(issue:any){
     const locationDatas = parseLocation(issue.body);
     for(let i=0;i<locationDatas.length;i++){
         const locationData = locationDatas[i];
-        const marker = L.marker([31.006484145313305,121.00624850096371],{
+        const marker = L.marker(locationData.location,{
             title: locationData.name,
             icon: L.divIcon({
                 className: style["online-place"],
