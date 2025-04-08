@@ -8,20 +8,21 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ExploreIcon from '@mui/icons-material/Explore';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import L from 'leaflet';
+
+import {map} from '@src/leaflet';
 
 import eventBus from "@src/eventBus";
 import { Ref } from '@src/utils';
+import {onMeasureClick} from '@src/measurer';
 
 const inintialRotate = -45;
 
-function zoomIn() {
-  eventBus.emit('UiLayerControl:zoomIn');
-}
-
-function zoomOut() {
-    eventBus.emit('UiLayerControl:zoomOut'); 
-}
-
+/**
+ * 切换全屏模式
+ */
 function toggleFullscreen() {
     const element = document.body;
     if (!document.fullscreenElement) {
@@ -31,51 +32,84 @@ function toggleFullscreen() {
     }
 }
 
+/**
+ * 地图放大缩小
+ */
+const zoomInOut = {
+    zoomIn() {
+        if(!map){
+            return;
+        }
+        map.zoomIn();
+    },
+    zoomOut() {
+        if(!map){
+            return;
+        }
+        map.zoomOut(); 
+    }
+}
+
 
 function openLayerSelector(){
     eventBus.emit("layerSelector:openLayerSelector");
 }
 
+function uploadPlace(){
+    if(!map){
+        return;
+    }
+    const marker = L.marker([map.getCenter().lat, map.getCenter().lng]).addTo(map);
+}
+
 function buttonCreator(){
     const rotate = Ref(0);
     const isMeasureActive = Ref(false);
+    //测量距离
     function measure() {
-        eventBus.emit('UiLayerControl:measure',{
-            isActive:!isMeasureActive.val
-        });
+        onMeasureClick(!isMeasureActive.val);
         isMeasureActive.set(!isMeasureActive.val)
     }
 
+    //指南针
+    function initRotateCallback(){
+        if(map){
+            map.on('rotate', (e) => {
+                rotate.set(e.target.getBearing());
+            });
+        }else{
+            setTimeout(initRotateCallback,500);
+        }
+    }
+    initRotateCallback();
+
     function rorateReset() {
-        eventBus.emit('UiLayerControl:rotateReset');
+        if(!map){
+            return;
+        }
+        map.setBearing(0);
         rotate.set(0);
     }
 
-    eventBus.on('UiLayerControl:rotate', (event:CustomEvent) => {
-        const r = event.detail;
-        if(isNaN(r)){
-            console.warn(`UiLayerControl:rotate event.detail '${r}' is not a number`);
-            return;
-        }
-        rotate.set(r);
-    })
-
     return (
         [
-        <Button key="zoomin" onClick={zoomIn}>
+        <Button key="zoomin" onClick={zoomInOut.zoomIn}>
             <ZoomInIcon />
         </Button>,
 
 
-        <Button key="zoomout" onClick={zoomOut}>
+        <Button key="zoomout" onClick={zoomInOut.zoomOut}>
             <ZoomOutIcon />
         </Button>,
-
 
         <Button key="compass" onClick={rorateReset}>
             <ExploreIcon sx={{
             transform: `rotate(${inintialRotate+rotate.val}deg)`
             }} />
+        </Button>,
+
+        <Button key="add" onClick={uploadPlace}>
+            <AddCircleIcon />
         </Button>,
 
 

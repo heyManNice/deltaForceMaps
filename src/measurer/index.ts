@@ -1,27 +1,24 @@
 import L from 'leaflet';
-import eventBus from '@src/eventBus';
+import {map} from '@src/leaflet';
 
 let isActive = false;
 
 const markers: L.Marker[] = [];
-
-let gloablMap:L.Map|undefined = undefined;
 
 let clearMeasured = ()=>{
     
 }
 
 function measure(event: L.LeafletMouseEvent){
-    if(!gloablMap){
+    if(!map){
         return; 
     }
     const location: L.LatLngExpression = event.latlng;
-    const map = gloablMap;
     if(!isActive) return;
     if(markers.length===2){
         //如果发现已经有了两个标记，就清空他们，重新开始
         markers.forEach((marker)=>{
-            marker.removeFrom(map);
+            marker.removeFrom(map!);
         })
         markers.length = 0;
         clearMeasured();
@@ -55,48 +52,35 @@ function measure(event: L.LeafletMouseEvent){
         map.fitBounds(bounds,{padding:[10,10]});
 
         clearMeasured = ()=>{
-            line.removeFrom(map);
-            tooltip.removeFrom(map);
+            line.remove();
+            tooltip.remove();
         }
     }
 }
 
+function initMeasure(){
+    if(map){
+        map.on('click', measure);
+    }else{
+        setTimeout(initMeasure, 500);
+    }
+}
 
-function onButtonClick(event:CustomEvent) {
-    if(!gloablMap){
+initMeasure();
+
+export function onMeasureClick(active:boolean) {
+    if(!map){
         return; 
     }
-
-    isActive = event.detail.isActive;
-    const map = gloablMap;
-
+    isActive = active;
     if(isActive) {
         map.getContainer().style.cursor = 'crosshair'; 
     }else{
         map.getContainer().style.cursor = 'grab';
         markers.forEach((marker)=>{
-            marker.removeFrom(map);
+            marker.remove();
         })
         markers.length = 0;
         clearMeasured();
     };
 }
-
-
-function enable(map: L.Map) {
-    gloablMap = map;
-    map.on("click",measure)
-    eventBus.on('UiLayerControl:measure',onButtonClick);
-}
-
-function disable() {
-    if(gloablMap){
-        gloablMap.off("click",measure);
-        eventBus.off('UiLayerControl:measure',onButtonClick); 
-    }
-}
-
-export default {
-    enable,
-    disable
-};
