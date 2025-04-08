@@ -3,16 +3,15 @@ import L from "leaflet";
 
 import {Layer} from '@src/uiLayer/layerSelector'
 
-let gloablMap:L.Map|undefined = undefined;
+let gloablMap:L.Map|null = null;
 
 const hidenLayerGroup:L.LayerGroup[] = [];
 const layerSelector = {
-    getNewLayersData(){
+    requestLayersData(){
         if(!gloablMap){
             return;
         }
         const data:Layer[] = [];
-
         //获取已显示的组
         gloablMap.eachLayer(function (layer) {
             if (layer instanceof L.LayerGroup) {
@@ -29,8 +28,7 @@ const layerSelector = {
                 name: layer.options.pane!,
             })
         }
-
-        eventBus.emit("layerSelector:layerOnload",data);
+        eventBus.emit("layerSelector:response-layers-data",data);
     },
     confirm(event:CustomEvent){
         if(!gloablMap){
@@ -40,7 +38,6 @@ const layerSelector = {
 
         const shows = data.filter((layer)=>layer.isShow);
         const hidens = data.filter((layer)=>!layer.isShow);
-        
     
         //即将显示
         const toRemove = [];
@@ -70,11 +67,11 @@ const layerSelector = {
         });
     },
     enalbe(){
-        eventBus.on("layerSelector:getNewLayersData",layerSelector.getNewLayersData)
+        eventBus.on("layerSelector:request-layers-data",layerSelector.requestLayersData)
         eventBus.on("layerSelector:confirm",layerSelector.confirm)
     },
     disable(){
-        eventBus.off("layerSelector:getNewLayersData",layerSelector.getNewLayersData)
+        eventBus.off("layerSelector:request-layers-data",layerSelector.requestLayersData)
         eventBus.off("layerSelector:confirm",layerSelector.confirm)
     }
 }
@@ -86,7 +83,7 @@ function enalbe(map:L.Map){
 
 function disable(){
     layerSelector.disable();
-    gloablMap = undefined;
+    gloablMap = null;
 }
 
 export default {

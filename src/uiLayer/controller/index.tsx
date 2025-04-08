@@ -52,7 +52,7 @@ const zoomInOut = {
 
 
 function openLayerSelector(){
-    eventBus.emit("layerSelector:openLayerSelector");
+    eventBus.emit("controller:layerSelector:open");
 }
 
 function uploadPlace(){
