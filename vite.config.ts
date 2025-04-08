@@ -18,6 +18,7 @@ function geojsonTojson(){
 
 // https://vite.dev/config/
 export default defineConfig({
+    base:"/deltaForceMaps/",
     plugins: [geojsonTojson(),react()],
     resolve: {
         alias: {

@@ -43,7 +43,7 @@ jobs:
 
       # Step: Build index.html
       - name: Build index.html
-        run: PUBLIC_URL=https://github.com/heyManNice/deltaForceMaps npm install && npm run build
+        run: PUBLIC_URL=npm install && npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
