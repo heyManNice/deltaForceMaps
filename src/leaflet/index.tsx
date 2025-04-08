@@ -28,7 +28,7 @@ const MapPlugins = [
 const defaultLocation:Location = [31.00123869701366, 121.00449874218026];
 
 
-L.Icon.Default.imagePath = '/leaflet/images/';
+L.Icon.Default.imagePath = './leaflet/images/';
 
 
 export let map:L.Map|null = null;
