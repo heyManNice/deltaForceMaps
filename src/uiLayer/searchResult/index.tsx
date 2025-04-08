@@ -33,7 +33,9 @@ function parsePlace(places: any) {
             Name: place.properties.Name,
             level: place.properties.Level,
             location: [place.geometry.coordinates[1], place.geometry.coordinates[0]],
-            icon: <PlaceIcon />,
+            icon: <PlaceIcon sx={{
+                margin:'0 1rem'
+            }} />,
         };
     });
 }
@@ -51,7 +53,7 @@ export default function SearchResult({
     const items = parsePlace(searchPlaces(searchInputvalue.val));
     function itemClickHandler(item: any) {
         searchInputvalue.set("");
-        map!.flyTo(item.location);
+        map!.flyTo(item.location,20);
     }
     if (searchInputvalue.val === "") return <></>;
     return (
