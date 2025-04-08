@@ -17,13 +17,20 @@ const placeholders = [
     "跑刀路线"
 ];
 
-function random(min:number,max:number){
+function random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export default function () {
+export default function ({
+    searchInputvalue
+}: {
+    searchInputvalue: {
+        val: string;
+        set: (newValue: string) => void;
+    }
+}) {
     const placeholderIndex = Ref(random(0, placeholders.length - 1));
-    useEffect(()=>{
+    useEffect(() => {
         const interval = setInterval(() => {
             placeholderIndex.set(random(0, placeholders.length - 1));
         }, 5000);
@@ -32,7 +39,16 @@ export default function () {
     return (
         <Paper
             component="form"
-            sx={{ p: '4px 4px', display: 'flex', alignItems: 'center', flex: '1 0 0', marginTop: "1rem", marginLeft: "1rem", marginRight: "1rem" }}
+            sx={{
+                p: '4px 4px',
+                display: 'flex',
+                alignItems: 'center',
+                flex: '1 0 0',
+                mt: "1rem",
+                ml: "1rem",
+                mr: "1rem",
+                zIndex: 2,
+            }}
         >
             <IconButton sx={{ p: '10px' }} aria-label="menu">
                 <MenuIcon />
@@ -40,7 +56,11 @@ export default function () {
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
                 placeholder={placeholders[placeholderIndex.val]}
-                inputProps={{ 'aria-label': '最近的卫星刷新点在哪里?' }}
+                value={searchInputvalue.val}
+                onChange={(e) => {
+                    searchInputvalue.set(e.target.value);
+                    e.preventDefault();
+                }}
             />
             <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
                 <SearchIcon />

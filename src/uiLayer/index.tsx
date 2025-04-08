@@ -1,12 +1,12 @@
-
-import Navigation from "./navigation"
-import SearchBox from "./searchBox"
 import Box from '@mui/material/Box';
-import Controller from "./controller"
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
-import LayerSelector from '@src/uiLayer/layerSelector'
+import Controller from "./controller"
+import Navigation from "./navigation"
+import SearchBox from "./searchBox"
+import LayerSelector from './layerSelector'
+import SearchResult from "./searchResult";
 
 import { SxProps, Theme } from '@mui/material/styles';
 import { Ref } from "@src/utils";
@@ -27,6 +27,9 @@ const screenStyle: SxProps<Theme> = {
 
 export default function() {
     const topOffset = Ref(0);
+
+    const searchInputvalue = Ref("");
+
     function updateViewOnResize(){
         const element = document.querySelector("body > div")!;
         const height = element.clientHeight;
@@ -57,9 +60,10 @@ export default function() {
                 width: '100%',
                 top: topOffset.val+'rem',
                 display: 'flex',
-                justifyContent: 'center'
+                flexDirection: 'column',
             }}>
-                <SearchBox />
+                <SearchBox searchInputvalue={searchInputvalue} />
+                <SearchResult searchInputvalue={searchInputvalue} />
             </Box>
             {/* 底部导航 */}
             <Box sx={{
