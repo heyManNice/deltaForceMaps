@@ -18,4 +18,10 @@ body{
 .leaflet-overlay-pane{
     opacity: 0.5;
 }
-  
+
+/*
+* 瓦片图层开启专属背景色
+*/
+.leaflet-container:has(.leaflet-map-pane>.leaflet-pane>.leaflet-tile-pane>.leaflet-layer){
+    background-color: #0F1D2A;
+}
