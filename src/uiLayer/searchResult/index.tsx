@@ -117,7 +117,7 @@ export default function SearchResult({
                         </ListItemButton>
                     </ListItem>
                 ))}
-                {items.length === 0 && (
+                {items.length === 0 && onlinePlacesResult.length===0 && (
                     <ListItem disablePadding>
                         <ListItemText sx={{
                             textAlign: 'center',
