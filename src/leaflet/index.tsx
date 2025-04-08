@@ -25,6 +25,7 @@ const MapPlugins = [
 
 const defaultLocation:Location = [31.00123869701366, 121.00449874218026];
 
+export let map:L.Map|null = null;
 
 const MapComponent = () => {
     const elementRef = useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ const MapComponent = () => {
 
         L.Icon.Default.imagePath = '/leaflet/images/';
 
-        const map = L.map(element, {
+        map = L.map(element, {
             center: defaultLocation,
             zoom: 20,
             zoomControl: false,
@@ -61,7 +62,8 @@ const MapComponent = () => {
                 const plugin = MapPlugins[i];
                 plugin.disable();
             }
-            map.remove();
+            map?.remove();
+            map = null;
         };
     }, []);
     
