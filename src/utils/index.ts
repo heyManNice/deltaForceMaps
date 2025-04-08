@@ -38,3 +38,21 @@ export function Ref<T>(initialValue: T) {
     },
   };
 }
+
+
+/**
+ * 防抖函数
+ * @param callback 回调函数
+ * @param delay 延迟时间
+ */
+export function debounce(callback:Function, delay:number = 1000){
+    let timer:any = null;
+    return function(...args:any){
+        if(timer){
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            callback(...args);
+        }, delay);
+    }
+}
