@@ -3,11 +3,11 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 
-function geojsonTojson(){
+function geojsonTojson() {
     return {
         name: "geojsonTojson",
-        transform(code:string,id:string){
-            if(!id.endsWith(".geojson")){
+        transform(code: string, id: string) {
+            if (!id.endsWith(".geojson")) {
                 return;
             }
             const json = JSON.stringify(JSON.parse(code));
@@ -18,8 +18,7 @@ function geojsonTojson(){
 
 // https://vite.dev/config/
 export default defineConfig({
-    base:"/deltaForceMaps/",
-    plugins: [geojsonTojson(),react()],
+    plugins: [geojsonTojson(), react()],
     resolve: {
         alias: {
             "@src": path.resolve(__dirname, "src"),
